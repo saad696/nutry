@@ -1,0 +1,300 @@
+<div class="container px-lg-5 mt-5">
+  <div *ngIf="showAlert">
+    <app-alert-message
+      [alertType]="alert.type"
+      [alertMsg]="alert.msg"
+      [duration]="alert.duration"
+    ></app-alert-message>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-body">
+          <h3 class="mb-4" *ngIf="!isModeResetPassword">
+            {{ isModeRegister ? "Register" : "Login" }}
+          </h3>
+          <h3 class="mb-4" *ngIf="isModeResetPassword">
+            {{ "Reset Password" | titlecase }}
+          </h3>
+          <form
+            *ngIf="!isModeResetPassword"
+            [formGroup]="authForm"
+            (ngSubmit)="onFormSubmit()"
+            class="needs-validation"
+            novalidate
+          >
+            <div class="row" *ngIf="isModeRegister">
+              <div class="col-12 col-md-6 mb-3">
+                <label for="name" class="form-label"
+                  >Name <span class="text-red">*</span></label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  [ngClass]="
+                    !authForm.get('name')?.valid &&
+                    authForm.get('name')?.touched
+                      ? 'is-invalid'
+                      : ''
+                  "
+                  formControlName="name"
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    !authForm.get('name')?.valid &&
+                    authForm.get('name')?.touched
+                  "
+                >
+                  This is a required field!
+                </div>
+              </div>
+              <div class="col-12 col-md-6 mb-3">
+                <label for="age" class="form-label"
+                  >Age <span class="text-red">*</span></label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  [ngClass]="
+                    !authForm.get('age')?.valid && authForm.get('age')?.touched
+                      ? 'is-invalid'
+                      : ''
+                  "
+                  formControlName="age"
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    !authForm.get('age')?.valid && authForm.get('age')?.touched
+                  "
+                >
+                  This is a required field!
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div
+                [ngClass]="
+                  isModeRegister ? 'col-12 col-md-6 mb-3' : 'col-12 mb-3'
+                "
+              >
+                <label for="email" class="form-label"
+                  >Email address <span class="text-red">*</span></label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  formControlName="email"
+                  aria-describedby="emailHelp"
+                  [ngClass]="
+                    !authForm.get('email')?.valid &&
+                    authForm.get('email')?.touched
+                      ? 'is-invalid'
+                      : ''
+                  "
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    !authForm.get('email')?.valid &&
+                    authForm.get('email')?.touched
+                  "
+                >
+                  Please enter a valid email!
+                </div>
+              </div>
+              <div
+                [ngClass]="
+                  isModeRegister ? 'col-12 col-md-6 mb-3' : 'col-12 mb-3'
+                "
+              >
+                <label for="password" class="form-label"
+                  >Password <span class="text-red">*</span></label
+                >
+                <input
+                  type="password"
+                  class="form-control"
+                  formControlName="password"
+                  [ngClass]="
+                    !authForm.get('password')?.valid &&
+                    authForm.get('password')?.touched
+                      ? 'is-invalid'
+                      : ''
+                  "
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    !authForm.get('password')?.valid &&
+                    authForm.get('password')?.touched
+                  "
+                >
+                  This is a required field!
+                </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="isModeRegister">
+              <div class="col-6 col-md-3 mb-3">
+                <label for="height" class="form-label"
+                  >Height <span class="text-red">*</span></label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  formControlName="height"
+                  [ngClass]="
+                    !authForm.get('height')?.valid &&
+                    authForm.get('height')?.touched
+                      ? 'is-invalid'
+                      : ''
+                  "
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    !authForm.get('height')?.valid &&
+                    authForm.get('height')?.touched
+                  "
+                >
+                  This is a required field!
+                </div>
+                <div id="emailHelp" class="form-text">
+                  Please enter height in
+                  <a
+                    class="no-underline"
+                    href="https://www.inchcalculator.com/height-converter/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >centimeters</a
+                  >.
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <label for="weight" class="form-label"
+                  >Weight <span class="text-red">*</span></label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  formControlName="weight"
+                  [ngClass]="
+                    !authForm.get('weight')?.valid &&
+                    authForm.get('weight')?.touched
+                      ? 'is-invalid'
+                      : ''
+                  "
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    !authForm.get('weight')?.valid &&
+                    authForm.get('weight')?.touched
+                  "
+                >
+                  This is a required field!
+                </div>
+                <div id="emailHelp" class="form-text">
+                  Please enter weight in
+                  <a
+                    class="no-underline"
+                    href="https://www.unitconverters.net/weight-and-mass/lbs-to-kg.htm"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >kilograms</a
+                  >.
+                </div>
+              </div>
+              <div class="col-6 col-md-3 mb-3">
+                <label for="activity-level" class="form-label"
+                  >Activity Level <span class="text-red">*</span></label
+                >
+                <select class="form-select" formControlName="activity">
+                  <option selected value="1">
+                    Sedentary (little to no exercise + work a desk job)
+                  </option>
+                  <option value="2">
+                    Lightly Active (light exercise 1-3 days / week)
+                  </option>
+                  <option value="3">
+                    Moderately Active (moderate exercise 3-5 days / week)
+                  </option>
+                  <option value="4">
+                    Very Active (heavy exercise 6-7 days / week)
+                  </option>
+                  <option value="5">
+                    Extremely Active (very heavy exercise, hard labor job,
+                    training 2x / day)
+                  </option>
+                </select>
+              </div>
+              <div class="col-6 col-md-3 mb-3">
+                <label for="gender" class="form-label"
+                  >Gender<span class="text-red">*</span></label
+                >
+                <select class="form-select" formControlName="gender">
+                  <option selected value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+            </div>
+            <button class="btn btn-primary mb-3" type="submit">
+              {{ isModeRegister ? "Register" : "Login" }}
+            </button>
+            <br />
+            <small
+              >{{
+                isModeRegister
+                  ? "Already have an account?"
+                  : "Dont have an account"
+              }}
+              <a (click)="switchMode()" class="pointer">{{
+                isModeRegister ? "Login" : "Register"
+              }}</a></small
+            >
+
+            <small *ngIf="!isModeRegister">
+              |
+              <button class="btn btn-link btn-sm" (click)="forgotPassword()">
+                Forgot Password?
+              </button>
+            </small>
+          </form>
+
+          <form
+            *ngIf="isModeResetPassword"
+            [formGroup]="resetPasswordForm"
+            (ngSubmit)="onForgotPasswordSubmit()"
+          >
+            <div class="row">
+              <div class="col-12">
+                <label for="email" class="form-label"
+                  >Email address <span class="text-red">*</span></label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  formControlName="email"
+                  aria-describedby="emailHelp"
+                  required
+                />
+              </div>
+              <div class="col-12 mt-3">
+                <div>
+                  <button class="btn btn-primary" type="submit">Submit</button>
+                  <button
+                    class="btn btn-danger mx-3"
+                    type="button"
+                    (click)="forgotPassword()"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
